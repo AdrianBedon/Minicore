@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Minicore/static/css/main.3f4fca1f.css",
-    "main.js": "/Minicore/static/js/main.fe90893a.js",
+    "main.js": "/Minicore/static/js/main.a5414b4d.js",
     "static/js/787.54ab60a8.chunk.js": "/Minicore/static/js/787.54ab60a8.chunk.js",
     "index.html": "/Minicore/index.html",
     "main.3f4fca1f.css.map": "/Minicore/static/css/main.3f4fca1f.css.map",
-    "main.fe90893a.js.map": "/Minicore/static/js/main.fe90893a.js.map",
+    "main.a5414b4d.js.map": "/Minicore/static/js/main.a5414b4d.js.map",
     "787.54ab60a8.chunk.js.map": "/Minicore/static/js/787.54ab60a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3f4fca1f.css",
-    "static/js/main.fe90893a.js"
+    "static/js/main.a5414b4d.js"
   ]
 }
