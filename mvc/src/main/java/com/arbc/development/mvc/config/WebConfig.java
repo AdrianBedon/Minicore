@@ -21,7 +21,7 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://192.168.3.32:3000", "http://172.31.66.70:3000", "https://adrianbedon.github.io/Minicore/"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://192.168.3.32:3000", "http://172.31.66.70:3000", "https://adrianbedon.github.io"));
         config.setAllowedHeaders(Arrays.asList(
             HttpHeaders.AUTHORIZATION,
             HttpHeaders.CONTENT_TYPE,
