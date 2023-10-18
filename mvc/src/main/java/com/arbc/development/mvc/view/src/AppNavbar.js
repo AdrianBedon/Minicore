@@ -8,7 +8,7 @@ const AppNavbar = () => {
 
     return (
         <Navbar color="dark" dark expandable="md">
-            <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+            <NavbarBrand tag={Link} to="/Minicore">Home</NavbarBrand>
             <NavbarBrand tag={Link} to="/sales">Ventas</NavbarBrand>
             <NavbarToggler onClick={() => { setIsOpen(!isOpen) }}/>
             <Collapse isOpen={isOpen} navbar>

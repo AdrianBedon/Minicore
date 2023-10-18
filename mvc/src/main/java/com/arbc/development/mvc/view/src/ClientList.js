@@ -92,7 +92,7 @@ const ClientList = () => {
                 <div className="float-end">
                     <Button color="success" tag={Link} to="/clients/new">Add Client</Button>
                 </div>
-                <h3>My Client List</h3>
+                <h3>My User List</h3>
                 <p/>
                 <Table className="mt-4 table-striped" hover responsive style={{borderRadius: 10, overflow: "hidden"}}>
                     <thead>
@@ -111,7 +111,7 @@ const ClientList = () => {
             </Container>
 
             <Container fluid>
-                <h3>Reporte de Ventas</h3>
+                <h3>Sales Report</h3>
                 <div>
                     <Label>Fecha de Inicio</Label>
                     <DatePicker type="date" name="fechaInicio" id="fechaInicio" selected={idate || ''} onChange={date => setiDate(date)} dateFormat="dd-MM-yyyy"></DatePicker>
