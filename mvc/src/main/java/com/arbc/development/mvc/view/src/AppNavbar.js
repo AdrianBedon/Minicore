@@ -9,6 +9,7 @@ const AppNavbar = () => {
     return (
         <Navbar color="dark" dark expandable="md">
             <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+            <NavbarBrand tag={Link} to="/sales">Ventas</NavbarBrand>
             <NavbarToggler onClick={() => { setIsOpen(!isOpen) }}/>
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="justify-content-end" style={{width: "100%"}} navbar>

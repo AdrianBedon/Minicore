@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
-import { Button, ButtonGroup, Container, ModalFooter, Table, Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Label, Button, ButtonGroup, Container, ModalFooter, Table, Modal, ModalBody, ModalHeader } from "reactstrap";
 import AppNavbar from "./AppNavbar";
 import {Link} from "react-router-dom";
 import { request } from "./helper/axios_helper";
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
+import { format } from 'date-fns';
 
 const ClientList = () => {
 
@@ -10,6 +13,9 @@ const ClientList = () => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [clientIdToDelete, setClientIdToDelete] = useState(null);
+    const [idate, setiDate] = useState(new Date());
+    const [fdate, setfDate] = useState(new Date());
+    const [ventas, setVentas] = useState([]);
 
     useEffect(() => {
         setLoading(true);
@@ -41,6 +47,16 @@ const ClientList = () => {
         });
     }
 
+    const getVentas = () => {
+        request(
+            'GET',
+            `/api/ventas/total?startDate=${format(idate, 'yyyy-MM-dd')}&endDate=${format(fdate, 'yyyy-MM-dd')}`,
+            {})
+        .then(response => {
+            setVentas(response.data);
+        });
+    }
+
     if (loading) {
         return <p>Loading...</p>;
     }
@@ -59,6 +75,15 @@ const ClientList = () => {
             </td>
         </tr>
     });
+
+    const ventasList = ventas.map(venta => {
+        return <tr>
+            <td style={{whiteSpace: 'nowrap'}}>{venta.name}</td>
+            <td>{venta.lastname}</td>
+            <td>$ {venta.monto}</td>
+        </tr>
+    });
+
 
     return (
         <div>
@@ -81,6 +106,33 @@ const ClientList = () => {
                     </thead>
                     <tbody>
                         {clientList}
+                    </tbody>
+                </Table>
+            </Container>
+
+            <Container fluid>
+                <h3>Reporte de Ventas</h3>
+                <div>
+                    <Label>Fecha de Inicio</Label>
+                    <DatePicker type="date" name="fechaInicio" id="fechaInicio" selected={idate || ''} onChange={date => setiDate(date)} dateFormat="dd-MM-yyyy"></DatePicker>
+
+                    <Label>Fecha de Fin</Label>
+                    <DatePicker type="date" name="fechaFin" id="fechaFin" selected={fdate || ''} onChange={date => setfDate(date)} dateFormat="dd-MM-yyyy"></DatePicker>
+                    <div className="float-end">
+                        <Button color="success" onClick={() => getVentas()}>Get Report</Button>
+                    </div>
+                </div>
+                <p></p>
+                <Table className="mt-4 table-striped" hover responsive style={{borderRadius: 10, overflow: "hidden"}}>
+                    <thead>
+                        <tr className="table-dark">
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Monto de Ventas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ventasList}
                     </tbody>
                 </Table>
             </Container>

@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Data
@@ -22,4 +26,7 @@ public class Cliente {
     private String lastname;
     private String email;
     
+    @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
+    private List<Ventas> ventas;
 }
