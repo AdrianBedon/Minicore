@@ -4,14 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Helmet } from 'react-helmet';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Helmet>
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    </Helmet>
     <App />
   </React.StrictMode>
 );
