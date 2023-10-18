@@ -40,7 +40,7 @@ const ClientEdit = () => {
             `/api/client${client.id ? `/${client.id}` : ''}`,
             JSON.stringify(client));
         setClient(initialFormState);
-        navigate('/clients');
+        navigate('/Minicore/clients');
     }
 
     const title = <h2>{client.id ? 'Edit Client' : 'Add Client'}</h2>
