@@ -15,7 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 
 @Component
-public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class UserAuthEP implements AuthenticationEntryPoint {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

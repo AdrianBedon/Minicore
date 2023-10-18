@@ -16,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
-    private final UserAuthenticationProvider userAuthenticationProvider;
+    private final UserAuthEP userAuthenticationEntryPoint;
+    private final UserAuthP userAuthenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
