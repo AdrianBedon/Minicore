@@ -4,15 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Helmet } from 'react-helmet';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <><head>
-    <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-request" />
-  </head>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode></>
+  <React.StrictMode>
+    <Helmet>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    </Helmet>
+    <App />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
