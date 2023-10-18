@@ -9,7 +9,7 @@ export const setAuthHeader = (token) => {
     window.localStorage.setItem('auth_token', token);
 };
 
-axios.defaults.baseURL = 'https://192.168.3.32:8080'/*,'http://172.31.66.70:8080'*/;
+axios.defaults.baseURL = 'https://192.168.3.32:443'/*,'http://172.31.66.70:8080'*/;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 
