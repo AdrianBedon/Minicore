@@ -9,6 +9,14 @@ export const setAuthHeader = (token) => {
     window.localStorage.setItem('auth_token', token);
 };
 
+export const getRole = () => {
+    return window.localStorage.getItem('role');
+};
+
+export const setRole = (role) => {
+    window.localStorage.setItem('role', role);
+};
+
 axios.defaults.baseURL = /*'https://192.168.3.32:443',*/'https://minicore-udla-api.onrender.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';

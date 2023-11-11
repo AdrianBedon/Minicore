@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import { Label, Button, ButtonGroup, Container, ModalFooter, Table, Modal, ModalBody, ModalHeader } from "reactstrap";
 import AppNavbar from "./AppNavbar";
 import {Link} from "react-router-dom";
-import { request } from "./helper/axios_helper";
+import { request, getRole } from "./helper/axios_helper";
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
+import { useParams } from "react-router-dom";
 
 const ClientList = () => {
 
@@ -16,6 +17,7 @@ const ClientList = () => {
     const [idate, setiDate] = useState(new Date());
     const [fdate, setfDate] = useState(new Date());
     const [ventas, setVentas] = useState([]);
+    let { role } = useParams();
 
     useEffect(() => {
         setLoading(true);
@@ -70,7 +72,7 @@ const ClientList = () => {
             <td>
                 <ButtonGroup>
                     <Button size="sm" color="primary" tag={Link} to={"/clients/" + client.id}>Edit</Button>
-                    <Button size="sm" color="danger" onClick={() => remove(client.id)}>Delete</Button>
+                    {role === 'ADMIN' && (<Button size="sm" color="danger" onClick={() => remove(client.id)}>Delete</Button>)}
                 </ButtonGroup>
             </td>
         </tr>

@@ -11,6 +11,7 @@ class LoginForm extends Component {
             lastName: '',
             login: '',
             password: '',
+            role:'',
             modalOpen: false // New state for managing modal visibility
         };
     }
@@ -33,7 +34,7 @@ class LoginForm extends Component {
     };
 
     handleRegisterSubmit = (e) => {
-        this.props.onRegister(e, this.state.firstName, this.state.lastName, this.state.login, this.state.password);
+        this.props.onRegister(e, this.state.firstName, this.state.lastName, this.state.login, this.state.password, this.state.role);
         this.setState(prevState => ({
             modalOpen: !prevState.modalOpen
         }));
@@ -105,6 +106,10 @@ class LoginForm extends Component {
                                     <FormGroup>
                                         <Label for="registerPassword">Password</Label>
                                         <Input type="password" name="password" id="registerPassword" onChange={this.handleChange} />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="registerRole">Role</Label>
+                                        <Input type="text" name="role" id="registerRole" onChange={this.handleChange} />
                                     </FormGroup>
                                     <Button color="primary" block>Sign up</Button>
                                 </Form>

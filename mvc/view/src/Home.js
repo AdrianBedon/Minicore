@@ -3,7 +3,7 @@ import './App.css';
 import AppNavbar from "./AppNavbar";
 import LoginForm from "./LoginForm";
 import WelcomeContent from "./WelcomeContent";
-import { setAuthHeader, request, getAuthToken } from "./helper/axios_helper";
+import { setAuthHeader, request, getAuthToken, setRole } from "./helper/axios_helper";
 
 class Home extends React.Component {
     constructor(props) {
@@ -34,16 +34,18 @@ class Home extends React.Component {
             }).then(
             (response) => {
                 setAuthHeader(response.data.token);
+                setRole(response.data.role);
                 this.setState({ componentToShow: "welcome" });
             }).catch(
             (error) => {
                 setAuthHeader(null);
+                setRole(null);
                 this.setState({ componentToShow: "login" });
             }
         );
     };
 
-    onRegister = (event, firstName, lastName, username, password) => {
+    onRegister = (event, firstName, lastName, username, password, role) => {
         event.preventDefault();
         request(
             "POST",
@@ -52,14 +54,17 @@ class Home extends React.Component {
                 firstName: firstName,
                 lastName: lastName,
                 login: username,
-                password: password
+                password: password,
+                role: role,
             }).then(
             (response) => {
                 setAuthHeader(response.data.token);
+                setRole(response.data.role);
                 this.setState({ componentToShow: "welcome" });
             }).catch(
             (error) => {
                 setAuthHeader(null);
+                setRole(null);
                 this.setState({ componentToShow: "login" });
             }
         );
