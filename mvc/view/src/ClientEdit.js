@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import AppNavbar from "./AppNavbar";
-import { request } from "./helper/axios_helper";
+import { request, getRole } from "./helper/axios_helper";
 
 const ClientEdit = () => {
     const initialFormState = {
@@ -40,7 +40,7 @@ const ClientEdit = () => {
             `/api/client${client.id ? `/${client.id}` : ''}`,
             JSON.stringify(client));
         setClient(initialFormState);
-        navigate('/clients');
+        navigate('/clients/' + getRole());
     }
 
     const title = <h2>{client.id ? 'Edit Client' : 'Add Client'}</h2>
@@ -72,7 +72,7 @@ const ClientEdit = () => {
                 </FormGroup>
                 <FormGroup>
                     <Button color="primary" type="submit">Save</Button>{' '}
-                    <Button color="secondary" tag={Link} to="/clients">Cancel</Button>
+                    <Button color="secondary" tag={Link} to={"/clients/" + getRole()}>Cancel</Button>
                 </FormGroup>
             </Form>
         </Container>

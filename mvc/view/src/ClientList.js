@@ -13,6 +13,7 @@ const ClientList = () => {
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [showConfirmationValid, setShowConfirmationValid] = useState(false);
     const [clientIdToDelete, setClientIdToDelete] = useState(null);
     const [idate, setiDate] = useState(new Date());
     const [fdate, setfDate] = useState(new Date());
@@ -41,11 +42,18 @@ const ClientList = () => {
         await request(
             'DELETE',
             `/api/client/${clientIdToDelete}`,
-            {})
+            {
+                role: role,
+            })
         .then(() => {
             let updatedClients = clients.filter(i => i.id !== clientIdToDelete);
             setClients(updatedClients);
             setShowConfirmation(false);
+        }).catch(
+        (error) => {
+            setClients(clients);
+            setShowConfirmation(false);
+            setShowConfirmationValid(true);
         });
     }
 
@@ -71,7 +79,7 @@ const ClientList = () => {
             <td>{client.email}</td>
             <td>
                 <ButtonGroup>
-                    <Button size="sm" color="primary" tag={Link} to={"/clients/" + client.id}>Edit</Button>
+                    <Button size="sm" color="primary" tag={Link} to={"/clients/" + role + "/" + client.id}>Edit</Button>
                     {role === 'ADMIN' && (<Button size="sm" color="danger" onClick={() => remove(client.id)}>Delete</Button>)}
                 </ButtonGroup>
             </td>
@@ -92,7 +100,7 @@ const ClientList = () => {
             <AppNavbar/>
             <Container fluid>
                 <div className="float-end">
-                    <Button color="success" tag={Link} to="/clients/new">Add Client</Button>
+                    <Button color="success" tag={Link} to={"/clients/" + getRole() + "/new"}>Add Client</Button>
                 </div>
                 <h3>My User List</h3>
                 <p/>
@@ -147,6 +155,16 @@ const ClientList = () => {
                 <ModalFooter>
                     <Button color="danger" onClick={confirmDelete}>Delete</Button>
                     <Button color="secondary" onClick={() => setShowConfirmation(false)}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={showConfirmationValid}>
+                <ModalHeader>Error</ModalHeader>
+                <ModalBody>
+                    No se eliminó el registro debido a un error o falta de permisos
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={() => setShowConfirmationValid(false)}>Ok</Button>
                 </ModalFooter>
             </Modal>
         </div>

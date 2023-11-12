@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, ModalBody, Nav, TabContent, TabPane, Form, FormGroup, Label, Input, Button, NavItem, NavLink, Container} from 'reactstrap';
+import { Modal, ModalBody, Nav, TabContent, TabPane, Form, FormGroup, Label, Input, Button, NavItem, NavLink, Container, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Row, Col} from 'reactstrap';
 import classnames from 'classnames';
 
 class LoginForm extends Component {
@@ -12,6 +12,7 @@ class LoginForm extends Component {
             login: '',
             password: '',
             role:'',
+            dropdownOpen: false,
             modalOpen: false // New state for managing modal visibility
         };
     }
@@ -21,6 +22,12 @@ class LoginForm extends Component {
             this.setState({ activeTab: tab });
         }
     }
+
+    toggleDropdown = () => {
+        this.setState((prevState) => ({
+            dropdownOpen: !prevState.dropdownOpen,
+        }));
+    };
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
@@ -91,25 +98,46 @@ class LoginForm extends Component {
                             </TabPane>
                             <TabPane tabId="register">
                                 <Form onSubmit={this.handleRegisterSubmit}>
-                                    <FormGroup>
-                                        <Label for="firstName">First Name</Label>
-                                        <Input type="text" name="firstName" id="firstName" onChange={this.handleChange} />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="lastName">Last Name</Label>
-                                        <Input type="text" name="lastName" id="lastName" onChange={this.handleChange} />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="registerLogin">Username</Label>
-                                        <Input type="text" name="login" id="registerLogin" onChange={this.handleChange} />
-                                    </FormGroup>
+                                    <p></p>
+                                    <Row form>
+                                        <Col md={6}>
+                                            <FormGroup>
+                                                <Label for="firstName">First Name</Label>
+                                                <Input type="text" name="firstName" id="firstName" onChange={this.handleChange} />
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={6}>
+                                            <FormGroup>
+                                                <Label for="lastName">Last Name</Label>
+                                                <Input type="text" name="lastName" id="lastName" onChange={this.handleChange} />
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <Row form>
+                                        <Col md={6}>
+                                            <FormGroup>
+                                                <Label for="registerLogin">Username</Label>
+                                                <Input type="text" name="login" id="registerLogin" onChange={this.handleChange} />
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={6}>
+                                            <FormGroup>
+                                                <Label for="registerRole">Role</Label>
+                                                <Dropdown name="role" id="registerRole" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                                                    <DropdownToggle caret color="dark" className="w-100">
+                                                        {this.state.role ? this.state.role : 'Select Role'}
+                                                    </DropdownToggle>
+                                                    <DropdownMenu>
+                                                        <DropdownItem onClick={() => this.setState({ role: 'ADMIN' })}>ADMIN</DropdownItem>
+                                                        <DropdownItem onClick={() => this.setState({ role: 'USER' })}>USER</DropdownItem>
+                                                    </DropdownMenu>
+                                                </Dropdown>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
                                     <FormGroup>
                                         <Label for="registerPassword">Password</Label>
                                         <Input type="password" name="password" id="registerPassword" onChange={this.handleChange} />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="registerRole">Role</Label>
-                                        <Input type="text" name="role" id="registerRole" onChange={this.handleChange} />
                                     </FormGroup>
                                     <Button color="primary" block>Sign up</Button>
                                 </Form>

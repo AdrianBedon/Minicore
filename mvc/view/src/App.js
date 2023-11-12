@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         <Route exact path="/Minicore" element={<Home/>}/>
         <Route path="/clients/:role" exact={true} element={<ProtectedClientList/>}/>
-        <Route path="/clients/:id" element={<ProtectedClientEdit/>}/>
+        <Route path="/clients/:role/:id" element={<ProtectedClientEdit/>}/>
         <Route path="/sales" exact={true} element={<ProtectedSaleList/>}/>
         <Route path="/sales/:id" element={<ProtectedSaleEdit/>}/>
       </Routes>
